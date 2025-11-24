@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I'm Sorry Shoonu 💕</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 800px;
+            width: 100%;
+            overflow: hidden;
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 40px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header h1 {
+            color: white;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .header p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2em;
+        }
+
+        .hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .heart {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 20px;
+            animation: float 4s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .heart:nth-child(1) {
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .heart:nth-child(2) {
+            left: 30%;
+            animation-delay: 1s;
+        }
+
+        .heart:nth-child(3) {
+            left: 50%;
+            animation-delay: 2s;
+        }
+
+        .heart:nth-child(4) {
+            left: 70%;
+            animation-delay: 1.5s;
+        }
+
+        .heart:nth-child(5) {
+            left: 90%;
+            animation-delay: 0.5s;
+        }
+
+        .tabs {
+            display: flex;
+            background: #f8f9fa;
+            border-bottom: 2px solid #dee2e6;
+            overflow-x: auto;
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            flex: 1;
+            min-width: 120px;
+            padding: 15px 20px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            color: #6c757d;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .tab:hover {
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+        }
+
+        .tab.active {
+            color: #667eea;
+            background: white;
+        }
+
+        .tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+
+        .content {
+            padding: 40px 30px;
+            min-height: 400px;
+        }
+
+        .tab-content {
+            display: none;
+            animation: slideIn 0.5s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        p {
+            line-height: 1.8;
+            color: #495057;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .question-box {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid #667eea;
+        }
+
+        .question-box h3 {
+            color: #495057;
+            margin-bottom: 15px;
+        }
+
+        .answer-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .answer-btn {
+            padding: 12px 20px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            text-align: left;
+        }
+
+        .answer-btn:hover {
+            background: #667eea;
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .answer-btn.selected {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-color: #764ba2;
+        }
+
+        .response-message {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .response-message.show {
+            display: block;
+        }
+
+        .response-message.positive {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .love-message {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .love-message p {
+            color: #7c2d12;
+            font-style: italic;
+            font-size: 1.2em;
+        }
+
+        .emoji {
+            font-size: 3em;
+            display: block;
+            margin: 15px 0;
+        }
+
+        .sorry-box {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .sorry-box h2 {
+            color: #c2185b;
+            font-size: 2.5em;
+        }
+
+        .sorry-box p {
+            color: #4a148c;
+            font-size: 1.15em;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .header p {
+                font-size: 1em;
+            }
+
+            .tab {
+                font-size: 0.9em;
+                padding: 12px 15px;
+            }
+
+            .content {
+                padding: 25px 20px;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            p {
+                font-size: 1em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.5em;
+            }
+
+            .tab {
+                min-width: 100px;
+                font-size: 0.85em;
+                padding: 10px;
+            }
+
+            .content {
+                padding: 20px 15px;
+                min-height: 300px;
+            }
+        }
+
+        .promise-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .promise-list li {
+            padding: 12px;
+            margin: 10px 0;
+            background: white;
+            border-left: 4px solid #f5576c;
+            border-radius: 5px;
+            color: #495057;
+            font-size: 1.1em;
+        }
+
+        .promise-list li::before {
+            content: "💖 ";
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="hearts">
+                <div class="heart">❤️</div>
+                <div class="heart">💕</div>
+                <div class="heart">💗</div>
+                <div class="heart">💖</div>
+                <div class="heart">❤️</div>
+            </div>
+            <h1>I'm So Sorry, Shoonu 💕</h1>
+            <p>For My Beautiful Ayman</p>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" onclick="openTab(event, 'sorry')">💌 My Apology</button>
+            <button class="tab" onclick="openTab(event, 'questions')">❓ For You</button>
+            <button class="tab" onclick="openTab(event, 'love')">💖 My Love</button>
+            <button class="tab" onclick="openTab(event, 'promises')">🤞 My Promises</button>
+        </div>
+
+        <div class="content">
+            <div id="sorry" class="tab-content active">
+                <div class="sorry-box">
+                    <h2>I'm Truly Sorry 😔</h2>
+                    <span class="emoji">🙏💔</span>
+                    <p>My Dearest Ayman, my precious Shoonu, my Baby Doll,</p>
+                </div>
+                <p>I know I hurt you, and I can't express how sorry I am for that. You mean the world to me, and seeing
+                    you upset breaks my heart into pieces. I never wanted to cause you any pain.</p>
+
+                <p>I was wrong, and I take full responsibility for my actions. There's no excuse for what I did, and I
+                    understand if you're angry with me. You have every right to be.</p>
+
+                <div class="love-message">
+                    <p>"You are my sunshine on cloudy days, my comfort when I'm down, and the smile that brightens my
+                        world. Without you, everything feels incomplete."</p>
+                </div>
+
+                <p>Please give me a chance to make things right. I promise to be more careful with your feelings, to
+                    listen better, and to never take you for granted. You deserve nothing but happiness, love, and
+                    respect.</p>
+
+                <p><strong>I love you more than words can say, Shoonu. Please forgive me. 💕</strong></p>
+            </div>
+
+            <div id="questions" class="tab-content">
+                <h2>Answer From Your Heart 💭</h2>
+                <p>Baby Doll, please take a moment to answer these questions. Your feelings matter to me:</p>
+
+                <div class="question-box">
+                    <h3>1. Do you believe that I truly love you?</h3>
+                    <div class="answer-options">
+                        <button class="answer-btn"
+                            onclick="selectAnswer(this, 'q1', 'Yes, I can feel your love and I know it\'s real. Thank you for showing me every day.')">Yes,
+                            I do believe you love me</button>
+                        <button class="answer-btn"
+                            onclick="selectAnswer(this, 'q1', 'Sometimes I have doubts, but I want to believe in us and work through this together.')">I'm
+                            not sure right now</button>
+                        <button class="answer-btn"
+                            onclick="selectAnswer(this, 'q1', 'I need you to show me through your actions, not just words. Let\'s rebuild this together.')">I
+                            need you to show me</button>
+                    </div>
+                    <div class="response-message positive" id="q1-response"></div>
+                </div>
+
+                <div class="question-box">
+                    <h3>2. Will you give me another chance to make things right?</h3>
+                    <div class="answer-options">
+                        <button class="answer-btn"
+                            onclick="selectAnswer(this, 'q2', 'Yes, I forgive you. Let\'s move forward together and make our bond even stronger. I love you!')">Yes,
+                            I forgive you</button>
+                        <button class="answer-btn"
+                            onclick="selectAnswer(this, 'q2', 'I need some time to process everything, but I\'m willing to work through this with you.')">I
+                            need some time</button>
+                        <button class="answer-btn"
+                            onclick="selectAnswer(this, 'q2', 'Let\'s talk about this and understand each other better. Communication is key for us.')">Let's
+                            talk about it</button>
+                    </div>
+                    <div class="response-message positive" id="q2-response"></div>
+                </div>
+
+                <div class="question-box">
+                    <h3>3. What can I do to make you smile again?</h3>
+                    <div class="answer-options">
+                        <button class="answer-btn"
+                            onclick="selectAnswer(this, 'q3', 'Your smile is my favorite sight! I promise to spend quality time with you and make you laugh every day.')">Spend
+                            more time with me</button>
+                        <button class="answer-btn"
+                            onclick="selectAnswer(this, 'q3', 'I hear you loud and clear, Shoonu. I\'ll be more attentive, listen to your heart, and cherish every word you say.')">Listen
+                            to me more</button>
+                        <button class="answer-btn"
+                            onclick="selectAnswer(this, 'q3', 'Small gestures mean the world to you, and I\'ll make sure to show my love in little ways every single day.')">Show
+                            me you care in small ways</button>
+                    </div>
+                    <div class="response-message positive" id="q3-response"></div>
+                </div>
+            </div>
+
+            <div id="love" class="tab-content">
+                <h2>Why I Love You, Ayman 💖</h2>
+                <span class="emoji">👸✨</span>
+
+                <p>My beautiful Shoonu, my precious Baby Doll, there are countless reasons why I love you, but let me
+                    share what makes you so incredibly special to me:</p>
+
+                <div class="love-message">
+                    <p>"In a world full of temporary things, you are my forever. You're not just my girlfriend; you're
+                        my best friend, my confidant, and my greatest blessing."</p>
+                </div>
+
+                <p><strong>Your smile</strong> lights up my darkest days. When you're happy, I'm happy. Your laughter is
+                    the most beautiful sound in the world, and I'd do anything to hear it.</p>
+
+                <p><strong>Your heart</strong> is pure gold. The way you care for others, the kindness you show, and the
+                    love you give makes you the most beautiful person inside and out.</p>
+
+                <p><strong>Your strength</strong> inspires me every day. You handle challenges with grace, and you make
+                    me want to be a better person just by being yourself.</p>
+
+                <div class="love-message">
+                    <p>"Every moment with you is a treasure. Every memory we create together is a gift I'll cherish
+                        forever. You are my today and all of my tomorrows."</p>
+                </div>
+
+                <p>I can't imagine my life without you, Ayman. You complete me in ways I never knew I needed. You're my
+                    home, my peace, and my greatest adventure all at once.</p>
+
+                <p><strong>I love you endlessly, Shoonu. Forever and always. 💕👑</strong></p>
+            </div>
+
+            <div id="promises" class="tab-content">
+                <h2>My Promises to You 🤞</h2>
+                <p>Baby Doll, these are my heartfelt promises to you:</p>
+
+                <ul class="promise-list">
+                    <li>I promise to always respect your feelings and never take them for granted</li>
+                    <li>I promise to communicate better and listen to you with an open heart</li>
+                    <li>I promise to make you smile every single day, no matter what</li>
+                    <li>I promise to be patient, understanding, and supportive in everything you do</li>
+                    <li>I promise to never hurt you intentionally and to learn from my mistakes</li>
+                    <li>I promise to cherish every moment we spend together</li>
+                    <li>I promise to love you unconditionally, today, tomorrow, and always</li>
+                    <li>I promise to be your safe space, your comfort, and your biggest cheerleader</li>
+                </ul>
+
+                <div class="love-message">
+                    <span class="emoji">💍💕</span>
+                    <p>"You deserve the world, Ayman, and I'll spend every day trying to give it to you. You're my
+                        queen, my everything, and I'm so grateful to have you in my life."</p>
+                </div>
+
+                <p style="text-align: center; font-size: 1.3em; color: #667eea; font-weight: 600;">I LOVE YOU SO MUCH,
+                    SHOONU! 💖✨</p>
+                <p style="text-align: center; font-style: italic;">Please forgive me, my Baby Doll 🥺💕</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openTab(evt, tabName) {
+            const tabContents = document.getElementsByClassName("tab-content");
+            for (let i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove("active");
+            }
+
+            const tabs = document.getElementsByClassName("tab");
+            for (let i = 0; i < tabs.length; i++) {
+                tabs[i].classList.remove("active");
+            }
+
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+
+        function selectAnswer(button, questionId, response) {
+            const parentBox = button.closest('.question-box');
+            const allButtons = parentBox.querySelectorAll('.answer-btn');
+            allButtons.forEach(btn => btn.classList.remove('selected'));
+
+            button.classList.add('selected');
+
+            const responseDiv = document.getElementById(questionId + '-response');
+            responseDiv.textContent = response;
+            responseDiv.classList.add('show');
+        }
+
+        // Animate hearts continuously
+        setInterval(() => {
+            const hearts = document.querySelectorAll('.heart');
+            hearts.forEach(heart => {
+                heart.style.animation = 'none';
+                setTimeout(() => {
+                    heart.style.animation = 'float 4s infinite ease-in-out';
+                }, 10);
+            });
+        }, 4000);
+    </script>
+</body>
+
+</html>
